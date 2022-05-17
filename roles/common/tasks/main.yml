@@ -6,8 +6,8 @@
     src: "{{item}}"
     dest: "/home/nishuadmin/"
   with_items:
-        - "/home/yashadmin/ansible-demo/ansible1/nginx"
-        - "/home/yashadmin/ansible-demo/ansible1/node"
+        - "./nginx"
+        - "./node"
 
 - name: command for chmod
   shell: "cd /home/nishuadmin/node/ && chmod +x node-start.sh"
