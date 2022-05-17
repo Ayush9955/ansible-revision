@@ -1,0 +1,24 @@
+---
+- name: nginx stop
+  command: "systemctl stop nginx"
+- name: copy
+  copy:
+    src: "{{item}}"
+    dest: "/home/nishuadmin/"
+  with_items:
+        - "/home/yashadmin/ansible-demo/ansible1/nginx"
+        - "/home/yashadmin/ansible-demo/ansible1/node"
+
+- name: command for chmod
+  shell: "cd /home/nishuadmin/node/ && chmod +x node-start.sh"
+
+- name: install docker.io
+  apt:
+    name: docker.io
+    state: latest
+
+- name:  image commands
+  shell: "cd /home/nishuadmin/nginx/ && docker build -t nginx . && cd ../node/ && docker build -t node2 ."
+
+- name: command for creating container
+  shell: "docker rm -f $(docker container ps -qa) && docker run -d --name node2 -p 3000:3000 node2 && docker run -d --name nginx --link node2 -p 80:80 nginx"

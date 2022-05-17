@@ -1,0 +1,2 @@
+[node2]
+192.168.1.2 ansible_user=nishuadmin ansible_sudo_pass='Ayush.123'
